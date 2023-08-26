@@ -1,10 +1,14 @@
 using PersonalPortfolio.Business.Extensions;
+using PersonalPortfolio.Business.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.ConfigureContextExtension(builder.Configuration);
+builder.Services.ConfigureRepositoryRegistration();
+builder.Services.ConfigureServiceRegistration();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
