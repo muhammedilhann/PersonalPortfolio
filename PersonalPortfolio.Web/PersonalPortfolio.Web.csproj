@@ -17,4 +17,8 @@
     <ProjectReference Include="..\PersonalPortfolio.Business\PersonalPortfolio.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
 </Project>
