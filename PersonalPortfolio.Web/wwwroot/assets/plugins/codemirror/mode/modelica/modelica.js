@@ -5,9 +5,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })
@@ -36,7 +36,7 @@
     function tokenBlockComment(stream, state) {
       var maybeEnd = false, ch;
       while (ch = stream.next()) {
-        if (maybeEnd && ch == "/") {
+        if (maybeEnd && ch == "~/") {
           state.tokenize = null;
           break;
         }
@@ -193,9 +193,9 @@
           return 0;
       },
 
-      blockCommentStart: "/*",
+      blockCommentStart: "~/*",
       blockCommentEnd: "*/",
-      lineComment: "//"
+      lineComment: "~//"
     };
   });
 

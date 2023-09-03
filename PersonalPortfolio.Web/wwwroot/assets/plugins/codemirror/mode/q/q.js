@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -21,7 +21,7 @@ CodeMirror.defineMode("q",function(config){
     var sol=stream.sol(),c=stream.next();
     curPunc=null;
     if(sol)
-      if(c=="/")
+      if(c=="~/")
         return(state.tokenize=tokenLineComment)(stream,state);
       else if(c=="\\"){
         if(stream.eol()||/\s/.test(stream.peek()))
@@ -30,7 +30,7 @@ CodeMirror.defineMode("q",function(config){
           return state.tokenize=tokenBase,"builtin";
       }
     if(/\s/.test(c))
-      return stream.peek()=="/"?(stream.skipToEnd(),"comment"):"whitespace";
+      return stream.peek()=="~/"?(stream.skipToEnd(),"comment"):"whitespace";
     if(c=='"')
       return(state.tokenize=tokenString)(stream,state);
     if(c=='`')

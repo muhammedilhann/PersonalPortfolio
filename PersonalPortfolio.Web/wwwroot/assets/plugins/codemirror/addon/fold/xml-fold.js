@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -48,7 +48,7 @@
       var gt = iter.text.indexOf(">", iter.ch);
       if (gt == -1) { if (nextLine(iter)) continue; else return; }
       if (!tagAt(iter, gt + 1)) { iter.ch = gt + 1; continue; }
-      var lastSlash = iter.text.lastIndexOf("/", gt);
+      var lastSlash = iter.text.lastIndexOf("~/", gt);
       var selfClose = lastSlash > -1 && !/\S/.test(iter.text.slice(lastSlash + 1, gt));
       iter.ch = gt + 1;
       return selfClose ? "selfClose" : "regular";
@@ -81,7 +81,7 @@
       var gt = iter.ch ? iter.text.lastIndexOf(">", iter.ch - 1) : -1;
       if (gt == -1) { if (prevLine(iter)) continue; else return; }
       if (!tagAt(iter, gt + 1)) { iter.ch = gt; continue; }
-      var lastSlash = iter.text.lastIndexOf("/", gt);
+      var lastSlash = iter.text.lastIndexOf("~/", gt);
       var selfClose = lastSlash > -1 && !/\S/.test(iter.text.slice(lastSlash + 1, gt));
       iter.ch = gt + 1;
       return selfClose ? "selfClose" : "regular";

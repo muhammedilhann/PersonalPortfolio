@@ -188,10 +188,10 @@ temporary images load their data.
     function patchSVGSource(svgSource) {
         var source = '';
         //add name spaces.
-        if (!svgSource.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
+        if (!svgSource.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"~/)) {
             source = svgSource.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
         }
-        if (!svgSource.match(/^<svg[^>]+"http:\/\/www\.w3\.org\/1999\/xlink"/)) {
+        if (!svgSource.match(/^<svg[^>]+"http:\/\/www\.w3\.org\/1999\/xlink"~/)) {
             source = svgSource.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
         }
 

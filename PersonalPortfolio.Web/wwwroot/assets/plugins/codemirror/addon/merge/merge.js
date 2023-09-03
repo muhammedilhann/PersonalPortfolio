@@ -5,9 +5,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror")); // Note non-packaged dependency diff_match_patch
+    mod(require("~/assets/lib/codemirror")); // Note non-packaged dependency diff_match_patch
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "diff_match_patch"], mod);
+    define(["~/assets/lib/codemirror", "diff_match_patch"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {

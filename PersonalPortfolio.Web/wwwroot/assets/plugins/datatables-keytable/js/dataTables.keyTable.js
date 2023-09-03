@@ -1116,7 +1116,7 @@ $.extend( KeyTable.prototype, {
 
 		// Only create the input element once on first class
 		if (! this.s.tabInput) {
-			var div = $('<div><input type="text" tabindex="'+tabIndex+'"/></div>')
+			var div = $('<div><input type="text" tabindex="'+tabIndex+'"~/></div>')
 				.css( {
 					position: 'absolute',
 					height: 1,

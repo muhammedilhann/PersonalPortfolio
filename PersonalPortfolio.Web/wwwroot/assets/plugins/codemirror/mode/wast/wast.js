@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("/assets/addon/mode/simple"));
+    mod(require("~/assets/lib/codemirror"), require("~/assets/addon/mode/simple"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "/assets/addon/mode/simple"], mod);
+    define(["~/assets/lib/codemirror", "~/assets/addon/mode/simple"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -108,7 +108,7 @@ CodeMirror.defineSimpleMode('wast', {
     {regex: new RegExp(kKeywords.join('|')), token: "keyword"},
     {regex: /\b((any|data|eq|extern|i31|func)ref|[fi](32|64)|i(8|16))\b/, token: "atom"},
     {regex: /\$([a-zA-Z0-9_`\+\-\*\/\\\^~=<>!\?@#$%&|:\.]+)/, token: "variable-2"},
-    {regex: /"(?:[^"\\\x00-\x1f\x7f]|\\[nt\\'"]|\\[0-9a-fA-F][0-9a-fA-F])*"/, token: "string"},
+    {regex: /"(?:[^"\\\x00-\x1f\x7f]|\\[nt\\'"]|\\[0-9a-fA-F][0-9a-fA-F])*"~/, token: "string"},
     {regex: /\(;.*?/, token: "comment", next: "comment"},
     {regex: /;;.*$/, token: "comment"},
     {regex: /\(/, indent: true},

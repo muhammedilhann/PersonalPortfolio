@@ -9,9 +9,9 @@
  */
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -34,7 +34,7 @@ CodeMirror.defineMode("pig", function(_config, parserConfig) {
     var isEnd = false;
     var ch;
     while(ch = stream.next()) {
-      if(ch == "/" && isEnd) {
+      if(ch == "~/" && isEnd) {
         state.tokenize = tokenBase;
         break;
       }
@@ -74,7 +74,7 @@ CodeMirror.defineMode("pig", function(_config, parserConfig) {
       return "number";
     }
     // multi line comment or operator
-    else if (ch == "/") {
+    else if (ch == "~/") {
       if (stream.eat("*")) {
         return chain(stream, state, tokenComment);
       }

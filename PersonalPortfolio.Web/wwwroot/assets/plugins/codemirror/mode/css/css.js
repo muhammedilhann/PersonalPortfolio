@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -408,7 +408,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     },
 
     electricChars: "}",
-    blockCommentStart: "/*",
+    blockCommentStart: "~/*",
     blockCommentEnd: "*/",
     blockCommentContinue: " * ",
     lineComment: lineComment,
@@ -729,7 +729,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
   function tokenCComment(stream, state) {
     var maybeEnd = false, ch;
     while ((ch = stream.next()) != null) {
-      if (maybeEnd && ch == "/") {
+      if (maybeEnd && ch == "~/") {
         state.tokenize = null;
         break;
       }
@@ -750,7 +750,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     colorKeywords: colorKeywords,
     valueKeywords: valueKeywords,
     tokenHooks: {
-      "/": function(stream, state) {
+      "~/": function(stream, state) {
         if (!stream.eat("*")) return false;
         state.tokenize = tokenCComment;
         return tokenCComment(stream, state);
@@ -769,10 +769,10 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     valueKeywords: valueKeywords,
     fontProperties: fontProperties,
     allowNested: true,
-    lineComment: "//",
+    lineComment: "~//",
     tokenHooks: {
-      "/": function(stream, state) {
-        if (stream.eat("/")) {
+      "~/": function(stream, state) {
+        if (stream.eat("~/")) {
           stream.skipToEnd();
           return ["comment", "comment"];
         } else if (stream.eat("*")) {
@@ -812,10 +812,10 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     valueKeywords: valueKeywords,
     fontProperties: fontProperties,
     allowNested: true,
-    lineComment: "//",
+    lineComment: "~//",
     tokenHooks: {
-      "/": function(stream, state) {
-        if (stream.eat("/")) {
+      "~/": function(stream, state) {
+        if (stream.eat("~/")) {
           stream.skipToEnd();
           return ["comment", "comment"];
         } else if (stream.eat("*")) {
@@ -853,7 +853,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     valueKeywords: valueKeywords,
     supportsAtComponent: true,
     tokenHooks: {
-      "/": function(stream, state) {
+      "~/": function(stream, state) {
         if (!stream.eat("*")) return false;
         state.tokenize = tokenCComment;
         return tokenCComment(stream, state);

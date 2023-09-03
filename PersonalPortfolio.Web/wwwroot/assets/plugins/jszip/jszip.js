@@ -1455,8 +1455,8 @@ var parentFolder = function (path) {
  */
 var forceTrailingSlash = function(path) {
     // Check the name ends with a /
-    if (path.slice(-1) !== "/") {
-        path += "/"; // IE doesn't like substr(-1)
+    if (path.slice(-1) !== "~/") {
+        path += "~/"; // IE doesn't like substr(-1)
     }
     return path;
 };
@@ -1611,8 +1611,8 @@ var out = {
         var file = this.files[name];
         if (!file) {
             // Look for any folders
-            if (name.slice(-1) !== "/") {
-                name += "/";
+            if (name.slice(-1) !== "~/") {
+                name += "~/";
             }
             file = this.files[name];
         }

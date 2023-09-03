@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -187,13 +187,13 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
       return state.tokenize(stream, state);
     }
     // Comments
-    if (ch == "/") {
+    if (ch == "~/") {
       stream.next();
       if (stream.eat("*")) {
         state.tokenize = tokenComment;
         return tokenComment(stream, state);
       }
-      if (stream.eat("/")) {
+      if (stream.eat("~/")) {
         stream.skipToEnd();
         return "comment";
       }
@@ -262,7 +262,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+      if (ch == "~/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
       }
@@ -472,9 +472,9 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
       else return ctx.indented + (closing ? 0 : indentUnit);
     },
 
-    blockCommentStart: "/*",
+    blockCommentStart: "~/*",
     blockCommentEnd: "*/",
-    lineComment: "//",
+    lineComment: "~//",
     fold: "indent"
   };
 });
@@ -505,8 +505,8 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     "?$": "qualifier",
     "?*": "qualifier",
     "-": "hr",
-    "/": "property",
-    "/-": "property",
+    "~/": "property",
+    "~/-": "property",
     "@": "variable-3",
     "@-": "variable-3",
     "@++": "variable-3",
@@ -532,7 +532,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
 
   // Lines starting with these characters define scope (result in indentation).
   var tlvScopePrefixChars = {
-    "/": "beh-hier",
+    "~/": "beh-hier",
     ">": "beh-hier",
     "-": "phys-hier",
     "|": "pipe",
@@ -695,7 +695,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
             style = "comment";
           } else if ((match = stream.match(tlvCommentMatch)) && !state.tlvInBlockComment) {
             // Start comment.
-            if (match[0] == "//") {
+            if (match[0] == "~//") {
               // Line comment.
               stream.skipToEnd();
             } else {

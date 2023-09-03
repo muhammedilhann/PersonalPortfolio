@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("../htmlmixed/htmlmixed"), require("../ruby/ruby"));
+    mod(require("~/assets/lib/codemirror"), require("../htmlmixed/htmlmixed"), require("../ruby/ruby"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "../htmlmixed/htmlmixed", "../ruby/ruby"], mod);
+    define(["~/assets/lib/codemirror", "../htmlmixed/htmlmixed", "../ruby/ruby"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -59,7 +59,7 @@
           return "hamlTag";
         } else if (stream.match(/^%[\w:]+/)) {
           return "hamlTag";
-        } else if (ch == "/" ) {
+        } else if (ch == "~/" ) {
           stream.skipToEnd();
           return "comment";
         }

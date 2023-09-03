@@ -265,7 +265,7 @@
                 }), t.default = function(e) {
                     return e.replace(i, "\\$1");
                 };
-                var i = new RegExp("(\\" + [ "/", ".", "*", "+", "?", "|", "(", ")", "[", "]", "{", "}", "\\", "$", "^" ].join("|\\") + ")", "gim");
+                var i = new RegExp("(\\" + [ "~/", ".", "*", "+", "?", "|", "(", ")", "[", "]", "{", "}", "\\", "$", "^" ].join("|\\") + ")", "gim");
             },
             6030: function(e, t, i) {
                 Object.defineProperty(t, "__esModule", {

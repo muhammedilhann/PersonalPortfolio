@@ -450,7 +450,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     if (R.type == "VML") {
         var d = g.doc.createElement("div"),
             b;
-        d.innerHTML = '<v:shape adj="1"/>';
+        d.innerHTML = '<v:shape adj="1"~/>';
         b = d.firstChild;
         b.style.behavior = "url(#default#VML)";
         if (!(b && typeof b.adj == "object")) {

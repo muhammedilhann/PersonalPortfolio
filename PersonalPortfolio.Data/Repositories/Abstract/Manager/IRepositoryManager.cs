@@ -8,9 +8,9 @@ namespace PersonalPortfolio.Data.Repositories.Abstract.Manager
 {
     public interface IRepositoryManager
     {
-        IAboutRepository About { get; }
-        IEducationRepository Education { get; }
-        IExperienceRepository Experience { get; }
+        IAboutRepository AboutRepository { get; }
+        IEducationRepository EducationRepository { get; }
+        IExperienceRepository ExperienceRepository { get; }
         void Save();
     }
 }

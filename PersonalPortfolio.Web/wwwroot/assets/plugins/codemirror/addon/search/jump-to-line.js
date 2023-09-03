@@ -5,9 +5,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("../dialog/dialog"));
+    mod(require("~/assets/lib/codemirror"), require("../dialog/dialog"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "../dialog/dialog"], mod);
+    define(["~/assets/lib/codemirror", "../dialog/dialog"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -22,7 +22,7 @@
   }
 
   function getJumpDialog(cm) {
-    return cm.phrase("Jump to line:") + ' <input type="text" style="width: 10em" class="CodeMirror-search-field"/> <span style="color: #888" class="CodeMirror-search-hint">' + cm.phrase("(Use line:column or scroll% syntax)") + '</span>';
+    return cm.phrase("Jump to line:") + ' <input type="text" style="width: 10em" class="CodeMirror-search-field"~/> <span style="color: #888" class="CodeMirror-search-hint">' + cm.phrase("(Use line:column or scroll% syntax)") + '</span>';
   }
 
   function interpretLine(cm, string) {

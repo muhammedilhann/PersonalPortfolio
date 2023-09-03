@@ -8624,11 +8624,11 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
                       return;
                     }
 
-                    file.fullPath = "".concat(path, "/").concat(file.name);
+                    file.fullPath = "".concat(path, "~/").concat(file.name);
                     return _this5.addFile(file);
                   });
                 } else if (entry.isDirectory) {
-                  _this5._addFilesFromDirectory(entry, "".concat(path, "/").concat(entry.name));
+                  _this5._addFilesFromDirectory(entry, "".concat(path, "~/").concat(entry.name));
                 }
               } // Recursively call readEntries() again, since browser only handle
               // the first 100 entries.
@@ -9744,7 +9744,7 @@ Dropzone.version = "5.9.3"; // This is a map of options for your different dropz
 //
 // And in html:
 //
-//     <form action="/upload" id="my-dropzone-element-id" class="dropzone"></form>
+//     <form action="~/upload" id="my-dropzone-element-id" class="dropzone"></form>
 
 Dropzone.options = {}; // Returns the options for an element or undefined if none available.
 

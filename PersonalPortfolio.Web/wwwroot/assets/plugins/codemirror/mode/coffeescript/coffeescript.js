@@ -7,9 +7,9 @@
  */
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -137,7 +137,7 @@ CodeMirror.defineMode("coffeescript", function(conf, parserConf) {
     }
     // Handle regex literals
     if (stream.match(regexPrefixes)) {
-      if (stream.current() != "/" || stream.match(/^.*\//, false)) { // prevent highlight of division
+      if (stream.current() != "~/" || stream.match(/^.*\//, false)) { // prevent highlight of division
         state.tokenize = tokenFactory(stream.current(), true, "string-2");
         return state.tokenize(stream, state);
       } else {

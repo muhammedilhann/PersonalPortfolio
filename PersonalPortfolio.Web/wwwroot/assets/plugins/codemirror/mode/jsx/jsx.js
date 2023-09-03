@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("../xml/xml"), require("../javascript/javascript"))
+    mod(require("~/assets/lib/codemirror"), require("../xml/xml"), require("../javascript/javascript"))
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "../xml/xml", "../javascript/javascript"], mod)
+    define(["~/assets/lib/codemirror", "../xml/xml", "../javascript/javascript"], mod)
   else // Plain browser env
     mod(CodeMirror)
 })(function(CodeMirror) {
@@ -79,10 +79,10 @@
           state.context = new Context(CodeMirror.startState(xmlMode, flatXMLIndent(cx.state)),
                                       xmlMode, 0, state.context)
           return null
-        } else if (stream.match("//")) {
+        } else if (stream.match("~//")) {
           stream.skipToEnd()
           return "comment"
-        } else if (stream.match("/*")) {
+        } else if (stream.match("~/*")) {
           cx.depth = 2
           return token(stream, state)
         }

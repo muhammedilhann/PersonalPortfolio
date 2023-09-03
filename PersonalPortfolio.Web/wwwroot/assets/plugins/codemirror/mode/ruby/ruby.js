@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -49,7 +49,7 @@ CodeMirror.defineMode("ruby", function(config) {
     var ch = stream.next(), m;
     if (ch == "`" || ch == "'" || ch == '"') {
       return chain(readQuoted(ch, "string", ch == '"' || ch == "`"), stream, state);
-    } else if (ch == "/") {
+    } else if (ch == "~/") {
       if (regexpAhead(stream))
         return chain(readQuoted(ch, "string-2", true), stream, state);
       else
@@ -149,7 +149,7 @@ CodeMirror.defineMode("ruby", function(config) {
         } else if ("]})".indexOf(next) > -1) {
           depth--
           if (depth < 0) break
-        } else if (next == "/" && depth == 0) {
+        } else if (next == "~/" && depth == 0) {
           found = true
           break
         }

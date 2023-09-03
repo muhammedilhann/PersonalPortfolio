@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports === "object" && typeof module === "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define === "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -26,7 +26,7 @@ CodeMirror.defineMode("clojure", function (options) {
       "*suppress-read*", "*unchecked-math*", "*use-context-classloader*",
       "*verbose-defrecords*", "*warn-on-reflection*", "+", "+'", "-", "-'",
       "->", "->>", "->ArrayChunk", "->Eduction", "->Vec", "->VecNode",
-      "->VecSeq", "-cache-protocol-fn", "-reset-methods", "..", "/", "<", "<=",
+      "->VecSeq", "-cache-protocol-fn", "-reset-methods", "..", "~/", "<", "<=",
       "=", "==", ">", ">=", "EMPTY-NODE", "Inst", "StackTraceElement->vec",
       "Throwable->map", "accessor", "aclone", "add-classpath", "add-watch",
       "agent", "agent-error", "agent-errors", "aget", "alength", "alias",
@@ -169,7 +169,7 @@ CodeMirror.defineMode("clojure", function (options) {
     if (stream.eatSpace() || stream.eat(",")) return ["space", null];
     if (stream.match(numberLiteral)) return [null, "number"];
     if (stream.match(characterLiteral)) return [null, "string-2"];
-    if (stream.eat(/^"/)) return (state.tokenize = inString)(stream, state);
+    if (stream.eat(/^"~/)) return (state.tokenize = inString)(stream, state);
     if (stream.eat(/^[(\[{]/)) return ["open", "bracket"];
     if (stream.eat(/^[)\]}]/)) return ["close", "bracket"];
     if (stream.eat(/^;/)) {stream.skipToEnd(); return ["space", "comment"];}

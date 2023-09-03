@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -33,7 +33,7 @@
     if (stream.eatSpace()) return null;
 
     // Handle one line Comments
-    if (stream.match("//")) {
+    if (stream.match("~//")) {
       stream.skipToEnd();
       return "comment";
     }
@@ -49,7 +49,7 @@
     }
 
     // Handle Strings
-    if (stream.match(/^"([^"]|(""))*"/)) { return "string"; }
+    if (stream.match(/^"([^"]|(""))*"~/)) { return "string"; }
     if (stream.match(/^'([^']|(''))*'/)) { return "string"; }
 
     // Handle words

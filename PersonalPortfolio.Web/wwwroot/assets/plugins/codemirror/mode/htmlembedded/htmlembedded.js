@@ -3,11 +3,11 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("../htmlmixed/htmlmixed"),
-        require("/assets/addon/mode/multiplex"));
+    mod(require("~/assets/lib/codemirror"), require("../htmlmixed/htmlmixed"),
+        require("~/assets/addon/mode/multiplex"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "../htmlmixed/htmlmixed",
-            "/assets/addon/mode/multiplex"], mod);
+    define(["~/assets/lib/codemirror", "../htmlmixed/htmlmixed",
+            "~/assets/addon/mode/multiplex"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {

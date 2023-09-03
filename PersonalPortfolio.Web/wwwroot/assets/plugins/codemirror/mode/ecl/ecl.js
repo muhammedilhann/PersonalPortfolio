@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -56,12 +56,12 @@ CodeMirror.defineMode("ecl", function(config) {
       stream.eatWhile(/[\w\.]/);
       return "number";
     }
-    if (ch == "/") {
+    if (ch == "~/") {
       if (stream.eat("*")) {
         state.tokenize = tokenComment;
         return tokenComment(stream, state);
       }
-      if (stream.eat("/")) {
+      if (stream.eat("~/")) {
         stream.skipToEnd();
         return "comment";
       }
@@ -120,7 +120,7 @@ CodeMirror.defineMode("ecl", function(config) {
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+      if (ch == "~/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
       }

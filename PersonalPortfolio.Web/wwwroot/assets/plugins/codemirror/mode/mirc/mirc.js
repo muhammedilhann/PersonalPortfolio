@@ -5,9 +5,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -105,7 +105,7 @@ CodeMirror.defineMode("mirc", function() {
       stream.eat(/./);
       return "number";
     }
-    else if (ch == "/" && stream.eat("*")) {
+    else if (ch == "~/" && stream.eat("*")) {
       return chain(stream, state, tokenComment);
     }
     else if (ch == ";" && stream.match(/ *\( *\(/)) {
@@ -116,7 +116,7 @@ CodeMirror.defineMode("mirc", function() {
       return "comment";
     }
     else if (ch == '"') {
-      stream.eat(/"/);
+      stream.eat(/"~/);
       return "keyword";
     }
     else if (ch == "$") {
@@ -153,7 +153,7 @@ CodeMirror.defineMode("mirc", function() {
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+      if (ch == "~/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
       }

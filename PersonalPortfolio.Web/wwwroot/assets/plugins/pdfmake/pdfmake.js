@@ -14354,7 +14354,7 @@ module.exports = /*#__PURE__*/function () {
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-var __dirname = "/";
+var __dirname = "~/";
 /* provided dependency */ var Buffer = __webpack_require__(8823)["Buffer"];
 
 
@@ -14932,7 +14932,7 @@ var PDFObject = /*#__PURE__*/function () {
       var encryptFn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null; // String literals are converted to the PDF name type
 
       if (typeof object === 'string') {
-        return "/".concat(object); // String objects are converted to PDF strings (UTF-16)
+        return "~/".concat(object); // String objects are converted to PDF strings (UTF-16)
       } else if (object instanceof String) {
         var string = object; // Detect if this is a unicode string
 
@@ -14993,7 +14993,7 @@ var PDFObject = /*#__PURE__*/function () {
 
         for (var key in object) {
           var val = object[key];
-          out.push("/".concat(key, " ").concat(PDFObject.convert(val, encryptFn)));
+          out.push("~/".concat(key, " ").concat(PDFObject.convert(val, encryptFn)));
         }
 
         out.push('>>');
@@ -16435,7 +16435,7 @@ var PDFGradient = /*#__PURE__*/function () {
       this.doc._setColorSpace('Pattern', stroke);
 
       var op = stroke ? 'SCN' : 'scn';
-      return this.doc.addContent("/".concat(this.id, " ").concat(op));
+      return this.doc.addContent("~/".concat(this.id, " ").concat(op));
     }
   }]);
 
@@ -16726,7 +16726,7 @@ var ColorMixin = {
   },
   _setColorSpace: function _setColorSpace(space, stroke) {
     var op = stroke ? 'CS' : 'cs';
-    return this.addContent("/".concat(space, " ").concat(op));
+    return this.addContent("~/".concat(space, " ").concat(op));
   },
   _getColorSpace: function _getColorSpace(color) {
     return color.length === 4 ? 'DeviceCMYK' : 'DeviceRGB';
@@ -16810,7 +16810,7 @@ var ColorMixin = {
     }
 
     this.page.ext_gstates[name] = dictionary;
-    return this.addContent("/".concat(name, " gs"));
+    return this.addContent("~/".concat(name, " gs"));
   },
   linearGradient: function linearGradient(x1, y1, x2, y2) {
     return new PDFLinearGradient$1(this, x1, y1, x2, y2);
@@ -18376,7 +18376,7 @@ var EmbeddedFont = /*#__PURE__*/function (_PDFFont) {
         _iterator.f();
       }
 
-      cmap.end("/CIDInit /ProcSet findresource begin\n12 dict begin\nbegincmap\n/CIDSystemInfo <<\n  /Registry (Adobe)\n  /Ordering (UCS)\n  /Supplement 0\n>> def\n/CMapName /Adobe-Identity-UCS def\n/CMapType 2 def\n1 begincodespacerange\n<0000><ffff>\nendcodespacerange\n1 beginbfrange\n<0000> <".concat(toHex(entries.length - 1), "> [").concat(entries.join(' '), "]\nendbfrange\nendcmap\nCMapName currentdict /CMap defineresource pop\nend\nend"));
+      cmap.end("~/CIDInit /ProcSet findresource begin\n12 dict begin\nbegincmap\n/CIDSystemInfo <<\n  /Registry (Adobe)\n  /Ordering (UCS)\n  /Supplement 0\n>> def\n/CMapName /Adobe-Identity-UCS def\n/CMapType 2 def\n1 begincodespacerange\n<0000><ffff>\nendcodespacerange\n1 beginbfrange\n<0000> <".concat(toHex(entries.length - 1), "> [").concat(entries.join(' '), "]\nendbfrange\nendcmap\nCMapName currentdict /CMap defineresource pop\nend\nend"));
       return cmap;
     }
   }]);
@@ -19320,7 +19320,7 @@ var TextMixin = {
 
     this.addContent("1 0 0 1 ".concat(number$2(x), " ").concat(number$2(y), " Tm")); // font and font size
 
-    this.addContent("/".concat(this._font.id, " ").concat(number$2(this._fontSize), " Tf")); // rendering mode
+    this.addContent("~/".concat(this._font.id, " ").concat(number$2(this._fontSize), " Tf")); // rendering mode
 
     var mode = options.fill && options.stroke ? 2 : options.stroke ? 1 : 0;
 
@@ -19874,7 +19874,7 @@ var ImagesMixin = {
 
     this.save();
     this.transform(w, 0, 0, -h, x, y + h);
-    this.addContent("/".concat(image.label, " Do"));
+    this.addContent("~/".concat(image.label, " Do"));
     this.restore();
     return this;
   },
@@ -20504,7 +20504,7 @@ var MarkingsMixin = {
       this.page.markings.push({
         tag: tag
       });
-      this.addContent("/".concat(tag, " BMC"));
+      this.addContent("~/".concat(tag, " BMC"));
       return this;
     }
 
@@ -20552,7 +20552,7 @@ var MarkingsMixin = {
       }
     }
 
-    this.addContent("/".concat(tag, " ").concat(PDFObject.convert(dictionary), " BDC"));
+    this.addContent("~/".concat(tag, " ").concat(PDFObject.convert(dictionary), " BDC"));
     return this;
   },
   markStructureContent: function markStructureContent(tag) {
@@ -20720,7 +20720,7 @@ var AcroFormMixin = {
     var data = {
       Fields: [],
       NeedAppearances: true,
-      DA: new String("/".concat(this._font.id, " 0 Tf 0 g")),
+      DA: new String("~/".concat(this._font.id, " 0 Tf 0 g")),
       DR: {
         Font: {}
       }
@@ -21022,7 +21022,7 @@ var AcroFormMixin = {
 
       var fontSize = options.fontSize || 0;
       options.DR.Font[this._font.id] = this._font.ref();
-      options.DA = new String("/".concat(this._font.id, " ").concat(fontSize, " Tf 0 g"));
+      options.DA = new String("~/".concat(this._font.id, " ").concat(fontSize, " Tf 0 g"));
     }
 
     return options;
@@ -36820,7 +36820,7 @@ var uncurryThis = __webpack_require__(1702);
 var requireObjectCoercible = __webpack_require__(4488);
 var toString = __webpack_require__(1340);
 
-var quot = /"/g;
+var quot = /"~/g;
 var replace = uncurryThis(''.replace);
 
 // `CreateHTML` abstract operation
@@ -46580,7 +46580,7 @@ DBCSDecoder.prototype.write = function(buf) {
             uCode = seq[seq.length-1];
         }
         else
-            throw new Error("iconv-lite internal error: invalid decoding table value " + uCode + " at " + nodeIdx + "/" + curByte);
+            throw new Error("iconv-lite internal error: invalid decoding table value " + uCode + " at " + nodeIdx + "~/" + curByte);
 
         // Write the character to buffer, handling higher planes using surrogate pair.
         if (uCode >= 0x10000) { 
@@ -48465,7 +48465,7 @@ Utf7Decoder.prototype.end = function() {
 // Differences:
 //  * Base64 part is started by "&" instead of "+"
 //  * Direct characters are 0x20-0x7E, except "&" (0x26)
-//  * In Base64, "," is used instead of "/"
+//  * In Base64, "," is used instead of "~/"
 //  * Base64 must not be used to represent direct characters.
 //  * No implicit shift back from Base64 (should always end with '-')
 //  * String must end in non-shifted position.
@@ -51142,9 +51142,9 @@ module.exports = function shimFlags() {
     SGML_DECL: S++, // <!BLARG
     SGML_DECL_QUOTED: S++, // <!BLARG foo "bar
     DOCTYPE: S++, // <!DOCTYPE
-    DOCTYPE_QUOTED: S++, // <!DOCTYPE "//blah
-    DOCTYPE_DTD: S++, // <!DOCTYPE "//blah" [ ...
-    DOCTYPE_DTD_QUOTED: S++, // <!DOCTYPE "//blah" [ "foo
+    DOCTYPE_QUOTED: S++, // <!DOCTYPE "~//blah
+    DOCTYPE_DTD: S++, // <!DOCTYPE "~//blah" [ ...
+    DOCTYPE_DTD_QUOTED: S++, // <!DOCTYPE "~//blah" [ "foo
     COMMENT_STARTING: S++, // <!-
     COMMENT: S++, // <!--
     COMMENT_ENDING: S++, // <!-- blah -
@@ -71747,7 +71747,7 @@ function formatPrimitive(ctx, value) {
   if (isString(value)) {
     var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
                                              .replace(/'/g, "\\'")
-                                             .replace(/\\"/g, '"') + '\'';
+                                             .replace(/\\"~/g, '"') + '\'';
     return ctx.stylize(simple, 'string');
   }
   if (isNumber(value))
@@ -71834,7 +71834,7 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
       name = ctx.stylize(name, 'name');
     } else {
       name = name.replace(/'/g, "\\'")
-                 .replace(/\\"/g, '"')
+                 .replace(/\\"~/g, '"')
                  .replace(/(^"|"$)/g, "'");
       name = ctx.stylize(name, 'string');
     }
@@ -72378,11 +72378,11 @@ XmlElement.prototype.toStringWithIndent = function(indent, options) {
       "area", "base", "br", "col", "embed", "frame", "hr", "img", "input",
       "keygen", "link", "menuitem", "meta", "param", "source", "track", "wbr"
     ];
-    if (whiteList.indexOf(this.name) !== -1) s += "/>";
+    if (whiteList.indexOf(this.name) !== -1) s += "~/>";
     else s += "></" + this.name + ">";
   }
   else {
-    s += "/>";
+    s += "~/>";
   }
 
   return s;
@@ -72513,7 +72513,7 @@ function extend(destination, source) {
 
 // escapes XML entities like "<", "&", etc.
 function escapeXML(value){
-  return value.toString().replace(/&/g, '&amp;').replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+  return value.toString().replace(/&/g, '&amp;').replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/'/g, '&apos;').replace(/"~/g, '&quot;');
 }
 
 // formats some text for debugging given a few options
@@ -72935,7 +72935,7 @@ module.exports = {
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
-var __dirname = "/";
+var __dirname = "~/";
 /* provided dependency */ var Buffer = __webpack_require__(8823)["Buffer"];
 
 

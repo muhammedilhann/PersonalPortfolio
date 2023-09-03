@@ -4,8 +4,8 @@
 (function (mod) {
   "use strict";
   if (typeof exports === "object" && typeof module === "object") {// CommonJS
-    mod(require("/assets/lib/codemirror"),
-        require("/assets/addon/mode/overlay"),
+    mod(require("~/assets/lib/codemirror"),
+        require("~/assets/addon/mode/overlay"),
         require("../xml/xml"),
         require("../javascript/javascript"),
         require("../coffeescript/coffeescript"),
@@ -15,8 +15,8 @@
         require("../pug/pug"),
         require("../handlebars/handlebars"));
   } else if (typeof define === "function" && define.amd) { // AMD
-    define(["/assets/lib/codemirror",
-            "/assets/addon/mode/overlay",
+    define(["~/assets/lib/codemirror",
+            "~/assets/addon/mode/overlay",
             "../xml/xml",
             "../javascript/javascript",
             "../coffeescript/coffeescript",

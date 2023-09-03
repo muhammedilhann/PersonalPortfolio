@@ -5,9 +5,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("/assets/addon/mode/simple"));
+    mod(require("~/assets/lib/codemirror"), require("~/assets/addon/mode/simple"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "/assets/addon/mode/simple"], mod);
+    define(["~/assets/lib/codemirror", "~/assets/addon/mode/simple"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -85,7 +85,7 @@ CodeMirror.defineSimpleMode("nsis",{
   ],
   meta: {
     electricInput: /^\s*((Function|PageEx|Section|Section(Group)?)End|(\!(endif|macroend))|\$\{(End(If|Unless|While)|Loop(Until)|Next)\})$/i,
-    blockCommentStart: "/*",
+    blockCommentStart: "~/*",
     blockCommentEnd: "*/",
     lineComment: ["#", ";"]
   }

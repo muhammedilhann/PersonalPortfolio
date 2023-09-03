@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -69,13 +69,13 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
       stream.match(/^\d*(?:\.\d*(?!\.))?(?:[eE][+\-]?\d+)?/);
       return ret("number", "number");
     } else if (state.reAllowed && (ch == "~" && stream.eat(/\//))) {
-      toUnescaped(stream, "/");
+      toUnescaped(stream, "~/");
       stream.eatWhile(/[gimsu]/);
       return ret("regexp", "string-2");
-    } else if (ch == "/") {
+    } else if (ch == "~/") {
       if (stream.eat("*")) {
         return chain(stream, state, haxeTokenComment);
-      } else if (stream.eat("/")) {
+      } else if (stream.eat("~/")) {
         stream.skipToEnd();
         return ret("comment", "comment");
       } else {
@@ -118,7 +118,7 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
   function haxeTokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+      if (ch == "~/" && maybeEnd) {
         state.tokenize = haxeTokenBase;
         break;
       }
@@ -435,9 +435,9 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
     },
 
     electricChars: "{}",
-    blockCommentStart: "/*",
+    blockCommentStart: "~/*",
     blockCommentEnd: "*/",
-    lineComment: "//"
+    lineComment: "~//"
   };
 });
 

@@ -107,7 +107,7 @@ var AutoFill = function( dt, opts )
 	 */
 	this.dom = {
 		/** @type {jQuery} AutoFill handle */
-		handle: $('<div class="dt-autofill-handle"/>'),
+		handle: $('<div class="dt-autofill-handle"~/>'),
 
 		/**
 		 * @type {Object} Selected cells outline - Need to use 4 elements,
@@ -115,14 +115,14 @@ var AutoFill = function( dt, opts )
 		 *   will be over that element, rather than the cells!
 		 */
 		select: {
-			top:    $('<div class="dt-autofill-select top"/>'),
-			right:  $('<div class="dt-autofill-select right"/>'),
-			bottom: $('<div class="dt-autofill-select bottom"/>'),
-			left:   $('<div class="dt-autofill-select left"/>')
+			top:    $('<div class="dt-autofill-select top"~/>'),
+			right:  $('<div class="dt-autofill-select right"~/>'),
+			bottom: $('<div class="dt-autofill-select bottom"~/>'),
+			left:   $('<div class="dt-autofill-select left"~/>')
 		},
 
 		/** @type {jQuery} Fill type chooser background */
-		background: $('<div class="dt-autofill-background"/>'),
+		background: $('<div class="dt-autofill-background"~/>'),
 
 		/** @type {jQuery} Fill type chooser */
 		list: $('<div class="dt-autofill-list">'+this.s.dt.i18n('autoFill.info', '')+'<ul/></div>'),

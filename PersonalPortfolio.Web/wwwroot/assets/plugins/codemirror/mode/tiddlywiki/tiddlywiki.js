@@ -19,9 +19,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -143,10 +143,10 @@ CodeMirror.defineMode("tiddlywiki", function () {
       return "number";
     }
 
-    if (ch == "/") { // tw invisible comment
+    if (ch == "~/") { // tw invisible comment
       if (stream.eat("%")) {
         return chain(stream, state, twTokenComment);
-      } else if (stream.eat("/")) { //
+      } else if (stream.eat("~/")) { //
         return chain(stream, state, twTokenEm);
       }
     }
@@ -179,7 +179,7 @@ CodeMirror.defineMode("tiddlywiki", function () {
   function twTokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+      if (ch == "~/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
       }
@@ -229,11 +229,11 @@ CodeMirror.defineMode("tiddlywiki", function () {
     var maybeEnd = false,
     ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+      if (ch == "~/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
       }
-      maybeEnd = (ch == "/");
+      maybeEnd = (ch == "~/");
     }
     return "em";
   }

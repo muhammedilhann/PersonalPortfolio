@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -104,7 +104,7 @@ CodeMirror.defineMode("xquery", function() {
         return chain(stream, state, tokenPreProcessing);
       }
 
-      var isclose = stream.eat("/");
+      var isclose = stream.eat("~/");
       stream.eatSpace();
       var tagName = "", c;
       while ((c = stream.eat(/[^\s\u00a0=<>\"\'\/?]/))) tagName += c;
@@ -125,7 +125,7 @@ CodeMirror.defineMode("xquery", function() {
     else if(isInXmlBlock(state)) {
       if(ch == ">")
         return "tag";
-      else if(ch == "/" && stream.eat(">")) {
+      else if(ch == "~/" && stream.eat(">")) {
         popStateStack(state);
         return "tag";
       }
@@ -307,7 +307,7 @@ CodeMirror.defineMode("xquery", function() {
         return "tag";
       }
       // self closing tag without attributes?
-      if(!stream.eat("/"))
+      if(!stream.eat("~/"))
         pushStateStack(state, { type: "tag", name: name, tokenize: tokenBase});
       if(!stream.eat(">")) {
         state.tokenize = tokenAttribute;
@@ -324,7 +324,7 @@ CodeMirror.defineMode("xquery", function() {
   function tokenAttribute(stream, state) {
     var ch = stream.next();
 
-    if(ch == "/" && stream.eat(">")) {
+    if(ch == "~/" && stream.eat(">")) {
       if(isInXmlAttributeBlock(state)) popStateStack(state);
       if(isInXmlBlock(state)) popStateStack(state);
       return "tag";
@@ -347,7 +347,7 @@ CodeMirror.defineMode("xquery", function() {
     stream.eatSpace();
 
     // the case where the attribute has not value and the tag was closed
-    if(stream.match(">", false) || stream.match("/", false)) {
+    if(stream.match(">", false) || stream.match("~/", false)) {
       popStateStack(state);
       state.tokenize = tokenBase;
     }

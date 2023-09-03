@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("../clike/clike"));
+    mod(require("~/assets/lib/codemirror"), require("../clike/clike"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "../clike/clike"], mod);
+    define(["~/assets/lib/codemirror", "../clike/clike"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -74,7 +74,7 @@
         return false;
       },
 
-      "/": function(stream, state) {
+      "~/": function(stream, state) {
         if (!stream.eat("*")) return false
         state.tokenize = tokenNestedComment(1)
         return state.tokenize(stream, state)
@@ -140,7 +140,7 @@
     return function (stream, state) {
       var ch
       while (ch = stream.next()) {
-        if (ch == "*" && stream.eat("/")) {
+        if (ch == "*" && stream.eat("~/")) {
           if (depth == 1) {
             state.tokenize = null
             break
@@ -148,7 +148,7 @@
             state.tokenize = tokenNestedComment(depth - 1)
             return state.tokenize(stream, state)
           }
-        } else if (ch == "/" && stream.eat("*")) {
+        } else if (ch == "~/" && stream.eat("*")) {
           state.tokenize = tokenNestedComment(depth + 1)
           return state.tokenize(stream, state)
         }

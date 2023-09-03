@@ -16,6 +16,6 @@ namespace PersonalPortfolio.Business.Services.Concrete
             _experienceManager = experienceManager;
         }
 
-        public IExperienceService Experience => _experienceManager;
+        public IExperienceService ExperienceService => _experienceManager;
     }
 }

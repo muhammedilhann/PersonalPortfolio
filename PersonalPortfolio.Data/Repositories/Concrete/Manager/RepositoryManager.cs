@@ -23,10 +23,10 @@ namespace PersonalPortfolio.Data.Repositories.Concrete.Manager
             _educationRepository = educationRepository;
             _experienceRepository = experienceRepository;
         }
-        public IAboutRepository About => _aboutRepository;
-        public IEducationRepository Education => _educationRepository;
+        public IAboutRepository AboutRepository => _aboutRepository;
+        public IEducationRepository EducationRepository => _educationRepository;
 
-        public IExperienceRepository Experience => _experienceRepository;
+        public IExperienceRepository ExperienceRepository => _experienceRepository;
         public void Save()
         {
             _context.SaveChanges();

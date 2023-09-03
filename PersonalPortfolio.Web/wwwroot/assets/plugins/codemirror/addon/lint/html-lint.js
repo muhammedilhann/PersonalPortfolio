@@ -7,9 +7,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("htmlhint"));
+    mod(require("~/assets/lib/codemirror"), require("htmlhint"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "htmlhint"], mod);
+    define(["~/assets/lib/codemirror", "htmlhint"], mod);
   else // Plain browser env
     mod(CodeMirror, window.HTMLHint);
 })(function(CodeMirror, HTMLHint) {

@@ -75,7 +75,7 @@ var _relToAbs = function( href ) {
 		linkHost += '/';
 	}
 
-	return _link.protocol+"//"+linkHost+_link.pathname+_link.search;
+	return _link.protocol+"~//"+linkHost+_link.pathname+_link.search;
 };
 
 

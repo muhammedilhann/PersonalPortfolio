@@ -1,0 +1,50 @@
+﻿@model ExperienceDto
+<div class="modal fade" id="ExperienceUpdateModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Experience</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal formExperienceUpdate">
+                    <input type="hidden" asp-for="@Model.Id"/>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label asp-for="@Model.Title" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="@Model.Title" value="@Model.Title" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="@Model.Description" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="@Model.Description" value="@Model.Description" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="@Model.StartDate" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <input id="StartDate" value="@Model.StartDate.ToString("yyy-MM-dd")" type="date" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="@Model.FinishDate" value="@Model.FinishDate" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <input id="FinishDate" value="@Model.FinishDate.ToString("yyyy-MM-dd")" type="date" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" onclick="sbtUpdateExperience()" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

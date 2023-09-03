@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -73,7 +73,7 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
         return (state.tokenize = tokenLiteral(stream.next(), true))(stream, state);
       }
       return "keyword";
-    } else if (support.commentSlashSlash && ch == "/" && stream.eat("/")) {
+    } else if (support.commentSlashSlash && ch == "~/" && stream.eat("~/")) {
       // 1-line comment
       stream.skipToEnd();
       return "comment";
@@ -83,7 +83,7 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
       // ref: https://kb.askmonty.org/en/comment-syntax/
       stream.skipToEnd();
       return "comment";
-    } else if (ch == "/" && stream.eat("*")) {
+    } else if (ch == "~/" && stream.eat("*")) {
       // multi-line comments
       // ref: https://kb.askmonty.org/en/comment-syntax/
       state.tokenize = tokenComment(1);
@@ -119,7 +119,7 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
       var word = stream.current().toLowerCase();
       // dates (standard SQL syntax)
       // ref: http://dev.mysql.com/doc/refman/5.5/en/date-and-time-literals.html
-      if (dateSQL.hasOwnProperty(word) && (stream.match(/^( )+'[^']*'/) || stream.match(/^( )+"[^"]*"/)))
+      if (dateSQL.hasOwnProperty(word) && (stream.match(/^( )+'[^']*'/) || stream.match(/^( )+"[^"]*"~/)))
         return "number";
       if (atoms.hasOwnProperty(word)) return "atom";
       if (builtin.hasOwnProperty(word)) return "type";
@@ -147,7 +147,7 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
     return function(stream, state) {
       var m = stream.match(/^.*?(\/\*|\*\/)/)
       if (!m) stream.skipToEnd()
-      else if (m[1] == "/*") state.tokenize = tokenComment(depth + 1)
+      else if (m[1] == "~/*") state.tokenize = tokenComment(depth + 1)
       else if (depth > 1) state.tokenize = tokenComment(depth - 1)
       else state.tokenize = tokenBase
       return "comment"
@@ -204,9 +204,9 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
       else return cx.indent + (closing ? 0 : config.indentUnit);
     },
 
-    blockCommentStart: "/*",
+    blockCommentStart: "~/*",
     blockCommentEnd: "*/",
-    lineComment: support.commentSlashSlash ? "//" : support.commentHash ? "#" : "--",
+    lineComment: support.commentSlashSlash ? "~//" : support.commentHash ? "#" : "--",
     closeBrackets: "()[]{}''\"\"``"
   };
 });
@@ -252,7 +252,7 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
       stream.match(/^.*'/);
       return "variable-2";
     } else if (stream.eat('"')) {
-      stream.match(/^.*"/);
+      stream.match(/^.*"~/);
       return "variable-2";
     } else if (stream.eat("`")) {
       stream.match(/^.*`/);

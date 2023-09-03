@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -118,7 +118,7 @@ CodeMirror.defineMode("oz", function (conf) {
       stream.skipToEnd();
       return 'comment';
     }
-    else if (ch == "/") {
+    else if (ch == "~/") {
       if (stream.eat("*")) {
         state.tokenize = tokenComment;
         return tokenComment(stream, state);
@@ -178,7 +178,7 @@ CodeMirror.defineMode("oz", function (conf) {
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+      if (ch == "~/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
       }
@@ -242,7 +242,7 @@ CodeMirror.defineMode("oz", function (conf) {
     fold: "indent",
     electricInput: buildElectricInputRegEx(),
     lineComment: "%",
-    blockCommentStart: "/*",
+    blockCommentStart: "~/*",
     blockCommentEnd: "*/"
   };
 });

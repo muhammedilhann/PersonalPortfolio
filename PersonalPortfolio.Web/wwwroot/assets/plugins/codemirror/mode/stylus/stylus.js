@@ -5,9 +5,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -51,12 +51,12 @@
       ch = stream.peek();
 
       // Line comment
-      if (stream.match("//")) {
+      if (stream.match("~//")) {
         stream.skipToEnd();
         return ["comment", "comment"];
       }
       // Block comment
-      if (stream.match("/*")) {
+      if (stream.match("~/*")) {
         state.tokenize = tokenCComment;
         return tokenCComment(stream, state);
       }
@@ -164,7 +164,7 @@
     function tokenCComment(stream, state) {
       var maybeEnd = false, ch;
       while ((ch = stream.next()) != null) {
-        if (maybeEnd && ch == "/") {
+        if (maybeEnd && ch == "~/") {
           state.tokenize = null;
           break;
         }
@@ -722,10 +722,10 @@
         return indent;
       },
       electricChars: "}",
-      blockCommentStart: "/*",
+      blockCommentStart: "~/*",
       blockCommentEnd: "*/",
       blockCommentContinue: " * ",
-      lineComment: "//",
+      lineComment: "~//",
       fold: "indent"
     };
   });

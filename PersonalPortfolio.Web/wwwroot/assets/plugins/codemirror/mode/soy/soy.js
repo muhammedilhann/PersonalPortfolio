@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("../htmlmixed/htmlmixed"));
+    mod(require("~/assets/lib/codemirror"), require("../htmlmixed/htmlmixed"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "../htmlmixed/htmlmixed"], mod);
+    define(["~/assets/lib/codemirror", "../htmlmixed/htmlmixed"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -475,16 +475,16 @@
               endTag = true;
               tagName = '';
             } else {
-              endTag = state.tag[0] == "/";
+              endTag = state.tag[0] == "~/";
               tagName = endTag ? state.tag.substring(1) : state.tag;
             }
             var tag = tags[tagName];
             if (stream.match(/^\/?}/)) {
-              var selfClosed = stream.current() == "/}";
+              var selfClosed = stream.current() == "~/}";
               if (selfClosed && !endTag) {
                 popcontext(state);
               }
-              if (state.tag == "/template" || state.tag == "/deltemplate") {
+              if (state.tag == "~/template" || state.tag == "~/deltemplate") {
                 state.variables = prepend(null, 'ij');
                 state.indent = 0;
               } else {
@@ -561,11 +561,11 @@
         } else if (match = stream.match(/^\{([/@\\]?\w+\??)(?=$|[\s}]|\/[/*])/)) {
           var prevTag = state.tag;
           state.tag = match[1];
-          var endTag = state.tag[0] == "/";
+          var endTag = state.tag[0] == "~/";
           var indentingTag = !!tags[state.tag];
           var tagName = endTag ? state.tag.substring(1) : state.tag;
           var tag = tags[tagName];
-          if (state.tag != "/switch")
+          if (state.tag != "~/switch")
             state.indent += ((endTag || tag && tag.reduceIndent) && prevTag != "switch" ? 1 : 2) * config.indentUnit;
 
           state.soyState.push("tag");
@@ -647,8 +647,8 @@
       },
 
       electricInput: /^\s*\{(\/|\/template|\/deltemplate|\/switch|fallbackmsg|elseif|else|case|default|ifempty|\/literal\})$/,
-      lineComment: "//",
-      blockCommentStart: "/*",
+      lineComment: "~//",
+      blockCommentStart: "~/*",
       blockCommentEnd: "*/",
       blockCommentContinue: " * ",
       useInnerComments: false,

@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("../htmlmixed/htmlmixed"), require("../clike/clike"));
+    mod(require("~/assets/lib/codemirror"), require("../htmlmixed/htmlmixed"), require("../clike/clike"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "../htmlmixed/htmlmixed", "../clike/clike"], mod);
+    define(["~/assets/lib/codemirror", "../htmlmixed/htmlmixed", "../clike/clike"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -123,8 +123,8 @@
         while (!stream.eol() && !stream.match("?>", false)) stream.next();
         return "comment";
       },
-      "/": function(stream) {
-        if (stream.eat("/")) {
+      "~/": function(stream) {
+        if (stream.eat("~/")) {
           while (!stream.eol() && !stream.match("?>", false)) stream.next();
           return "comment";
         }
@@ -220,9 +220,9 @@
         return state.curMode.indent(state.curState, textAfter, line);
       },
 
-      blockCommentStart: "/*",
+      blockCommentStart: "~/*",
       blockCommentEnd: "*/",
-      lineComment: "//",
+      lineComment: "~//",
 
       innerMode: function(state) { return {state: state.curState, mode: state.curMode}; }
     };

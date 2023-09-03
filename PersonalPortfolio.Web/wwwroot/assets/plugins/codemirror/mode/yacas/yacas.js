@@ -6,9 +6,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -57,7 +57,7 @@ CodeMirror.defineMode('yacas', function(_config, _parserConfig) {
         state.tokenize = tokenComment;
         return state.tokenize(stream, state);
       }
-      if (stream.eat("/")) {
+      if (stream.eat("~/")) {
         stream.skipToEnd();
         return "comment";
       }
@@ -191,9 +191,9 @@ CodeMirror.defineMode('yacas', function(_config, _parserConfig) {
       return (state.scopes.length + delta) * _config.indentUnit;
     },
     electricChars: "{}[]();",
-    blockCommentStart: "/*",
+    blockCommentStart: "~/*",
     blockCommentEnd: "*/",
-    lineComment: "//"
+    lineComment: "~//"
   };
 });
 

@@ -14,6 +14,7 @@ namespace PersonalPortfolio.Business.Mapper
         public MappingProfile()
         {
             CreateMap<Experience,ExperienceDto>().ReverseMap();
+            CreateMap<Experience,ExperienceAddDto>().ReverseMap();
         }
     }
 }

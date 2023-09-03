@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("/assets/addon/mode/simple"));
+    mod(require("~/assets/lib/codemirror"), require("~/assets/addon/mode/simple"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "/assets/addon/mode/simple"], mod);
+    define(["~/assets/lib/codemirror", "~/assets/addon/mode/simple"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -14,10 +14,10 @@
 CodeMirror.defineSimpleMode("rust",{
   start: [
     // string and byte string
-    {regex: /b?"/, token: "string", next: "string"},
+    {regex: /b?"~/, token: "string", next: "string"},
     // raw string and raw byte string
-    {regex: /b?r"/, token: "string", next: "string_raw"},
-    {regex: /b?r#+"/, token: "string", next: "string_raw_hash"},
+    {regex: /b?r"~/, token: "string", next: "string_raw"},
+    {regex: /b?r#+"~/, token: "string", next: "string_raw_hash"},
     // character
     {regex: /'(?:[^'\\]|\\(?:[nrt0'"]|x[\da-fA-F]{2}|u\{[\da-fA-F]{6}\}))'/, token: "string-2"},
     // byte
@@ -41,11 +41,11 @@ CodeMirror.defineSimpleMode("rust",{
     {regex: /[\}\]\)]/, dedent: true}
   ],
   string: [
-    {regex: /"/, token: "string", next: "start"},
+    {regex: /"~/, token: "string", next: "start"},
     {regex: /(?:[^\\"]|\\(?:.|$))*/, token: "string"}
   ],
   string_raw: [
-    {regex: /"/, token: "string", next: "start"},
+    {regex: /"~/, token: "string", next: "start"},
     {regex: /[^"]*/, token: "string"}
   ],
   string_raw_hash: [
@@ -59,9 +59,9 @@ CodeMirror.defineSimpleMode("rust",{
   meta: {
     dontIndentStates: ["comment"],
     electricInput: /^\s*\}$/,
-    blockCommentStart: "/*",
+    blockCommentStart: "~/*",
     blockCommentEnd: "*/",
-    lineComment: "//",
+    lineComment: "~//",
     fold: "brace"
   }
 });

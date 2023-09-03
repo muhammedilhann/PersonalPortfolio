@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -25,7 +25,7 @@ CodeMirror.defineMode("sieve", function(config) {
   function tokenBase(stream, state) {
 
     var ch = stream.next();
-    if (ch == "/" && stream.eat("*")) {
+    if (ch == "~/" && stream.eat("*")) {
       state.tokenize = tokenCComment;
       return tokenCComment(stream, state);
     }
@@ -137,7 +137,7 @@ CodeMirror.defineMode("sieve", function(config) {
   function tokenCComment(stream, state) {
     var maybeEnd = false, ch;
     while ((ch = stream.next()) != null) {
-      if (maybeEnd && ch == "/") {
+      if (maybeEnd && ch == "~/") {
         state.tokenize = tokenBase;
         break;
       }

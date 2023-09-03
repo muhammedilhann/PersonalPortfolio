@@ -6,9 +6,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -21,7 +21,7 @@
     var tokenBase = function(stream/*, state*/) {
       var ch = stream.next();
       if (ch ==='"') {
-        stream.match(/^[^"]*"/);
+        stream.match(/^[^"]*"~/);
         return "string";
       }
       if (ch === "'") {
@@ -31,7 +31,7 @@
       if (/[{}\(\),\.;\[\]]/.test(ch)) {
         curPunc = ch;
         return "node";
-      } else if (ch === "/" && stream.eat("/")) {
+      } else if (ch === "~/" && stream.eat("~/")) {
         stream.skipToEnd();
         return "comment";
       } else if (operatorChars.test(ch)) {

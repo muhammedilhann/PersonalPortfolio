@@ -1144,9 +1144,9 @@ Responsive.display = {
 					$(document).off( 'keypress.dtr' );
 				};
 
-				var modal = $('<div class="dtr-modal"/>')
-					.append( $('<div class="dtr-modal-display"/>')
-						.append( $('<div class="dtr-modal-content"/>')
+				var modal = $('<div class="dtr-modal"~/>')
+					.append( $('<div class="dtr-modal-display"~/>')
+						.append( $('<div class="dtr-modal-content"~/>')
 							.append( render() )
 						)
 						.append( $('<div class="dtr-modal-close">&times;</div>' )
@@ -1155,7 +1155,7 @@ Responsive.display = {
 							} )
 						)
 					)
-					.append( $('<div class="dtr-modal-background"/>')
+					.append( $('<div class="dtr-modal-background"~/>')
 						.click( function () {
 							close();
 						} )
@@ -1243,7 +1243,7 @@ function _childNodesRestore( dt, row, col ) {
 Responsive.renderer = {
 	listHiddenNodes: function () {
 		return function ( api, rowIdx, columns ) {
-			var ul = $('<ul data-dtr-index="'+rowIdx+'" class="dtr-details"/>');
+			var ul = $('<ul data-dtr-index="'+rowIdx+'" class="dtr-details"~/>');
 			var found = false;
 
 			var data = $.each( columns, function ( i, col ) {
@@ -1259,7 +1259,7 @@ Responsive.renderer = {
 							'</span> '+
 						'</li>'
 					)
-						.append( $('<span class="dtr-data"/>').append( _childNodes( api, col.rowIndex, col.columnIndex ) ) )// api.cell( col.rowIndex, col.columnIndex ).node().childNodes ) )
+						.append( $('<span class="dtr-data"~/>').append( _childNodes( api, col.rowIndex, col.columnIndex ) ) )// api.cell( col.rowIndex, col.columnIndex ).node().childNodes ) )
 						.appendTo( ul );
 
 					found = true;
@@ -1292,7 +1292,7 @@ Responsive.renderer = {
 			} ).join('');
 
 			return data ?
-				$('<ul data-dtr-index="'+rowIdx+'" class="dtr-details"/>').append( data ) :
+				$('<ul data-dtr-index="'+rowIdx+'" class="dtr-details"~/>').append( data ) :
 				false;
 		}
 	},
@@ -1314,7 +1314,7 @@ Responsive.renderer = {
 					'</tr>';
 			} ).join('');
 
-			return $('<table class="'+options.tableClass+' dtr-details" width="100%"/>').append( data );
+			return $('<table class="'+options.tableClass+' dtr-details" width="100%"~/>').append( data );
 		}
 	}
 };

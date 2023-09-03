@@ -825,7 +825,7 @@ var uPlot = (function () {
 	const NLyyyy  = NL + yyyy;
 	const md      = "{M}/{D}";
 	const NLmd    = NL + md;
-	const NLmdyy  = NLmd + "/{YY}";
+	const NLmdyy  = NLmd + "~/{YY}";
 
 	const aa      = "{aa}";
 	const hmm     = "{h}:{mm}";

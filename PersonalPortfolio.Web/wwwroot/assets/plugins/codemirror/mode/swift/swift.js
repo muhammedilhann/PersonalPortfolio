@@ -5,9 +5,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object")
-    mod(require("/assets/lib/codemirror"))
+    mod(require("~/assets/lib/codemirror"))
   else if (typeof define == "function" && define.amd)
-    define(["/assets/lib/codemirror"], mod)
+    define(["~/assets/lib/codemirror"], mod)
   else
     mod(CodeMirror)
 })(function(CodeMirror) {
@@ -47,12 +47,12 @@
     if (stream.eatSpace()) return null
 
     var ch = stream.peek()
-    if (ch == "/") {
-      if (stream.match("//")) {
+    if (ch == "~/") {
+      if (stream.match("~//")) {
         stream.skipToEnd()
         return "comment"
       }
-      if (stream.match("/*")) {
+      if (stream.match("~/*")) {
         state.tokenize.push(tokenComment)
         return tokenComment(stream, state)
       }
@@ -147,9 +147,9 @@
       stream.match(/^[^/*]+/, true)
       ch = stream.next()
       if (!ch) break
-      if (ch === "/" && stream.eat("*")) {
+      if (ch === "~/" && stream.eat("*")) {
         state.tokenize.push(tokenComment)
-      } else if (ch === "*" && stream.eat("/")) {
+      } else if (ch === "*" && stream.eat("~/")) {
         state.tokenize.pop()
       }
     }
@@ -211,8 +211,8 @@
 
       electricInput: /^\s*[\)\}\]]$/,
 
-      lineComment: "//",
-      blockCommentStart: "/*",
+      lineComment: "~//",
+      blockCommentStart: "~/*",
       blockCommentEnd: "*/",
       fold: "brace",
       closeBrackets: "()[]{}''\"\"``"

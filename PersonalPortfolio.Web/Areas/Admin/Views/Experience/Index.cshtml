@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .dataTables_filter{
+        display:none !important;
+    }
+</style>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h4>Experience</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header row col-md-12 row">
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <div>
+                                <a class="btn btn-sm btn-success" onclick="AddExperience()">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                            <div>
+                                <input class="form-control mr-sm-2" id="searchFilter" type="search" placeholder="Search" aria-label="Search">
+                            </div>
+                       </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="ExperienceTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>StartDate</th>
+                                    <th>FinishDate</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                      
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<div id="ExperienceAddModalDiv"></div>
+<div id="ExperienceUpdateModalDiv"></div>
+@section Scripts
+{
+    <script src="~/js/experience.js"></script>
+}

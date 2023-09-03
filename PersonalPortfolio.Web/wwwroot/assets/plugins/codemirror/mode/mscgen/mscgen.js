@@ -11,9 +11,9 @@
 
 (function(mod) {
   if ( typeof exports == "object" && typeof module == "object")// CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if ( typeof define == "function" && define.amd)// AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else// Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -28,7 +28,7 @@
       "brackets" : ["\\{", "\\}"], // [ and  ] are brackets too, but these get handled in with lists
       "arcsWords" : ["note", "abox", "rbox", "box"],
       "arcsOthers" : ["\\|\\|\\|", "\\.\\.\\.", "---", "--", "<->", "==", "<<=>>", "<=>", "\\.\\.", "<<>>", "::", "<:>", "->", "=>>", "=>", ">>", ":>", "<-", "<<=", "<=", "<<", "<:", "x-", "-x"],
-      "singlecomment" : ["//", "#"],
+      "singlecomment" : ["~//", "#"],
       "operators" : ["="]
     },
     xu: {
@@ -39,7 +39,7 @@
       "brackets" : ["\\{", "\\}"],  // [ and  ] are brackets too, but these get handled in with lists
       "arcsWords" : ["note", "abox", "rbox", "box", "alt", "else", "opt", "break", "par", "seq", "strict", "neg", "critical", "ignore", "consider", "assert", "loop", "ref", "exc"],
       "arcsOthers" : ["\\|\\|\\|", "\\.\\.\\.", "---", "--", "<->", "==", "<<=>>", "<=>", "\\.\\.", "<<>>", "::", "<:>", "->", "=>>", "=>", ">>", ":>", "<-", "<<=", "<=", "<<", "<:", "x-", "-x"],
-      "singlecomment" : ["//", "#"],
+      "singlecomment" : ["~//", "#"],
       "operators" : ["="]
     },
     msgenny: {
@@ -50,7 +50,7 @@
       "brackets" : ["\\{", "\\}"],
       "arcsWords" : ["note", "abox", "rbox", "box", "alt", "else", "opt", "break", "par", "seq", "strict", "neg", "critical", "ignore", "consider", "assert", "loop", "ref", "exc"],
       "arcsOthers" : ["\\|\\|\\|", "\\.\\.\\.", "---", "--", "<->", "==", "<<=>>", "<=>", "\\.\\.", "<<>>", "::", "<:>", "->", "=>>", "=>", ">>", ":>", "<-", "<<=", "<=", "<<", "<:", "x-", "-x"],
-      "singlecomment" : ["//", "#"],
+      "singlecomment" : ["~//", "#"],
       "operators" : ["="]
     }
   }
@@ -62,7 +62,7 @@
       copyState: copyStateFn,
       token: produceTokenFunction(language),
       lineComment : "#",
-      blockCommentStart : "/*",
+      blockCommentStart : "~/*",
       blockCommentEnd : "*/"
     };
   });
@@ -127,7 +127,7 @@
         return "string";
       }
       if (pState.inString) {
-        if (pStream.match(/[^\"]*\"/, true, true))
+        if (pStream.match(/[^\"]*\"~/, true, true))
           pState.inString = false;
         else
           pStream.skipToEnd();

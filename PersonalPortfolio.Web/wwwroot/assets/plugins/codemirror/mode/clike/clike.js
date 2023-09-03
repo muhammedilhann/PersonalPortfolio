@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -91,12 +91,12 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
       curPunc = ch;
       return null;
     }
-    if (ch == "/") {
+    if (ch == "~/") {
       if (stream.eat("*")) {
         state.tokenize = tokenComment;
         return tokenComment(stream, state);
       }
-      if (stream.eat("/")) {
+      if (stream.eat("~/")) {
         stream.skipToEnd();
         return "comment";
       }
@@ -141,7 +141,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+      if (ch == "~/" && maybeEnd) {
         state.tokenize = null;
         break;
       }
@@ -246,10 +246,10 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     },
 
     electricInput: indentSwitch ? /^\s*(?:case .*?:|default:|\{\}?|\})$/ : /^\s*[{}]$/,
-    blockCommentStart: "/*",
+    blockCommentStart: "~/*",
     blockCommentEnd: "*/",
     blockCommentContinue: " * ",
-    lineComment: "//",
+    lineComment: "~//",
     fold: "brace"
   };
 });
@@ -320,7 +320,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
       if (ch == "\\" && stream.match(/^.$/)) {
         next = cppHook
         break
-      } else if (ch == "/" && stream.match(/^\/[\/\*]/, false)) {
+      } else if (ch == "~/" && stream.match(/^\/[\/\*]/, false)) {
         break
       }
       stream.next()
@@ -548,7 +548,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     return function (stream, state) {
       var ch
       while (ch = stream.next()) {
-        if (ch == "*" && stream.eat("/")) {
+        if (ch == "*" && stream.eat("~/")) {
           if (depth == 1) {
             state.tokenize = null
             break
@@ -556,7 +556,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
             state.tokenize = tokenNestedComment(depth - 1)
             return state.tokenize(stream, state)
           }
-        } else if (ch == "/" && stream.eat("*")) {
+        } else if (ch == "~/" && stream.eat("*")) {
           state.tokenize = tokenNestedComment(depth + 1)
           return state.tokenize(stream, state)
         }
@@ -621,7 +621,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
         }
       },
 
-      "/": function(stream, state) {
+      "~/": function(stream, state) {
         if (!stream.eat("*")) return false
         state.tokenize = tokenNestedComment(1)
         return state.tokenize(stream, state)
@@ -689,7 +689,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
         state.tokenize = tokenKotlinString(stream.match('""'));
         return state.tokenize(stream, state);
       },
-      "/": function(stream, state) {
+      "~/": function(stream, state) {
         if (!stream.eat("*")) return false;
         state.tokenize = tokenNestedComment(1);
         return state.tokenize(stream, state)

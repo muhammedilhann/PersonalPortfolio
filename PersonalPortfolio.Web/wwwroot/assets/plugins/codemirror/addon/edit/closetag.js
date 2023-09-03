@@ -29,9 +29,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"), require("../fold/xml-fold"));
+    mod(require("~/assets/lib/codemirror"), require("../fold/xml-fold"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror", "../fold/xml-fold"], mod);
+    define(["~/assets/lib/codemirror", "../fold/xml-fold"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -74,14 +74,14 @@
       if (!tagName ||
           tok.type == "string" && (tok.end != pos.ch || !/[\"\']/.test(tok.string.charAt(tok.string.length - 1)) || tok.string.length == 1) ||
           tok.type == "tag" && tagInfo.close ||
-          tok.string.indexOf("/") == (pos.ch - tok.start - 1) || // match something like <someTagName />
+          tok.string.indexOf("~/") == (pos.ch - tok.start - 1) || // match something like <someTagName />
           dontCloseTags && indexOf(dontCloseTags, lowerTagName) > -1 ||
           closingTagExists(cm, inner.mode.xmlCurrentContext && inner.mode.xmlCurrentContext(state) || [], tagName, pos, true))
         return CodeMirror.Pass;
 
       var emptyTags = typeof opt == "object" && opt.emptyTags;
       if (emptyTags && indexOf(emptyTags, tagName) > -1) {
-        replacements[i] = { text: "/>", newPos: CodeMirror.Pos(pos.line, pos.ch + 2) };
+        replacements[i] = { text: "~/>", newPos: CodeMirror.Pos(pos.line, pos.ch + 2) };
         continue;
       }
 
@@ -107,7 +107,7 @@
 
   function autoCloseCurrent(cm, typingSlash) {
     var ranges = cm.listSelections(), replacements = [];
-    var head = typingSlash ? "/" : "</";
+    var head = typingSlash ? "~/" : "</";
     var opt = cm.getOption("autoCloseTags");
     var dontIndentOnAutoClose = (typeof opt == "object" && opt.dontIndentOnSlash);
     for (var i = 0; i < ranges.length; i++) {

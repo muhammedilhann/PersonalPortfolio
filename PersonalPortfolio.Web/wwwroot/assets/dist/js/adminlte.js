@@ -2623,7 +2623,7 @@
     var _proto = Toasts.prototype;
 
     _proto.create = function create() {
-      var toast = $__default["default"]('<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"/>');
+      var toast = $__default["default"]('<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"~/>');
       toast.data('autohide', this._config.autohide);
       toast.data('animation', this._config.fade);
 

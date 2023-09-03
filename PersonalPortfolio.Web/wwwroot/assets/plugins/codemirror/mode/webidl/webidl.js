@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("/assets/lib/codemirror"));
+    mod(require("~/assets/lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["/assets/lib/codemirror"], mod);
+    define(["~/assets/lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -86,7 +86,7 @@ var integers = /^-?([1-9][0-9]*|0[Xx][0-9A-Fa-f]+|0[0-7]*)/;
 var floats = /^-?(([0-9]+\.[0-9]*|[0-9]*\.[0-9]+)([Ee][+-]?[0-9]+)?|[0-9]+[Ee][+-]?[0-9]+)/;
 var identifiers = /^_?[A-Za-z][0-9A-Z_a-z-]*/;
 var identifiersEnd = /^_?[A-Za-z][0-9A-Z_a-z-]*(?=\s*;)/;
-var strings = /^"[^"]*"/;
+var strings = /^"[^"]*"~/;
 var multilineComments = /^\/\*.*?\*\//;
 var multilineCommentsStart = /^\/\*.*/;
 var multilineCommentsEnd = /^.*?\*\//;
@@ -104,7 +104,7 @@ function readToken(stream, state) {
     stream.skipToEnd();
     return "comment";
   }
-  if (stream.match("//")) {
+  if (stream.match("~//")) {
     stream.skipToEnd();
     return "comment";
   }

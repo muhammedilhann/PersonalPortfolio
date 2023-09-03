@@ -4268,7 +4268,7 @@
 		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
 		var features = settings.aanFeatures;
-		var input = '<input type="search" class="'+classes.sFilterInput+'"/>';
+		var input = '<input type="search" class="'+classes.sFilterInput+'"~/>';
 	
 		var str = language.sSearch;
 		str = str.match(/_INPUT_/) ?
@@ -10314,7 +10314,7 @@
 		 *       "url": "data.json",
 		 *       "dataSrc": function ( json ) {
 		 *         for ( var i=0, ien=json.length ; i<ien ; i++ ) {
-		 *           json[i][0] = '<a href="/message/'+json[i][0]+'>View message</a>';
+		 *           json[i][0] = '<a href="~/message/'+json[i][0]+'>View message</a>';
 		 *         }
 		 *         return json;
 		 *       }
@@ -11154,7 +11154,7 @@
 		 *        "stateSave": true,
 		 *        "stateLoadCallback": function (settings, callback) {
 		 *          $.ajax( {
-		 *            "url": "/state_load",
+		 *            "url": "~/state_load",
 		 *            "dataType": "json",
 		 *            "success": function (json) {
 		 *              callback( json );
@@ -11258,7 +11258,7 @@
 		 *        "stateSaveCallback": function (settings, data) {
 		 *          // Send an Ajax request to the server with the state object
 		 *          $.ajax( {
-		 *            "url": "/state_save",
+		 *            "url": "~/state_save",
 		 *            "data": data,
 		 *            "dataType": "json",
 		 *            "method": "POST"
@@ -15112,7 +15112,7 @@
 				.replace(/&/g, '&amp;')
 				.replace(/</g, '&lt;')
 				.replace(/>/g, '&gt;')
-				.replace(/"/g, '&quot;') :
+				.replace(/"~/g, '&quot;') :
 			d;
 	};
 	

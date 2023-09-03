@@ -8,6 +8,6 @@ namespace PersonalPortfolio.Business.Services.Abstract
 {
     public interface IServiceManager
     {
-        IExperienceService Experience { get; }
+        IExperienceService ExperienceService { get; }
     }
 }

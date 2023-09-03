@@ -742,7 +742,7 @@ $.extend( $.validator, {
 
 				// Legacy browsers
 				// Unix-based path
-				idx = val.lastIndexOf( "/" );
+				idx = val.lastIndexOf( "~/" );
 				if ( idx >= 0 ) {
 					return val.substr( idx + 1 );
 				}
@@ -975,7 +975,7 @@ $.extend( $.validator, {
 
 					// Make sure the element is visible, even in IE
 					// actually showing the wrapped element is handled elsewhere
-					place = error.hide().show().wrap( "<" + this.settings.wrapper + "/>" ).parent();
+					place = error.hide().show().wrap( "<" + this.settings.wrapper + "~/>" ).parent();
 				}
 				if ( this.labelContainer.length ) {
 					this.labelContainer.append( place );

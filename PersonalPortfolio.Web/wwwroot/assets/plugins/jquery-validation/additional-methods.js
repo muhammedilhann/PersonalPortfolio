@@ -92,11 +92,11 @@ $.validator.addMethod( "accept", function( value, element, param ) {
 
 		// Escape string to be used in the regex
 		// see: https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
-		// Escape also "/*" as "/.*" as a wildcard
+		// Escape also "~/*" as "~/.*" as a wildcard
 		typeParam = typeParam
 				.replace( /[\-\[\]\/\{\}\(\)\+\?\.\\\^\$\|]/g, "\\$&" )
 				.replace( /,/g, "|" )
-				.replace( /\/\*/g, "/.*" );
+				.replace( /\/\*/g, "~/.*" );
 
 		// Check if the element has a FileList before checking each file
 		if ( element.files && element.files.length ) {
@@ -660,7 +660,7 @@ $.validator.addMethod( "dateITA", function( value, element ) {
 		re = /^\d{1,2}\/\d{1,2}\/\d{4}$/,
 		adata, gg, mm, aaaa, xdata;
 	if ( re.test( value ) ) {
-		adata = value.split( "/" );
+		adata = value.split( "~/" );
 		gg = parseInt( adata[ 0 ], 10 );
 		mm = parseInt( adata[ 1 ], 10 );
 		aaaa = parseInt( adata[ 2 ], 10 );
