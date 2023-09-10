@@ -92,21 +92,17 @@ function sbtAddExperience() {
         data: { 'expAddData': JSON.stringify(experienceAddData) },
         dataType: "json",
     }).done(function (response) {
-        if (response.data != null) {
+        if (response.success) {
             $('#ExperienceAddModal').modal('hide');
             Swal.fire({
-                    icon: 'success',
-                    title: 'Add successful',
-                    confirmButtonText: 'Okey'
+                icon: 'success',
+                title: 'Experience added successfully',
+                confirmButtonText: 'Okey'
                 }).then((rslt) => {
                     GetExperienceData();
                 });
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Add Failed',
-                confirmButtonText: 'Okey'
-            });
+            showErrors(response.errors);
         }
     }).fail(function (error) {
         Swal.fire({
@@ -147,7 +143,7 @@ function sbtUpdateExperience() {
         data: { 'expUpdateData': JSON.stringify(experienceUpdateData) },
         dataType: "json",
     }).done(function (response) {
-        if (response.data != null) {
+        if (response.success) {
             $('#ExperienceUpdateModal').modal('hide');
             Swal.fire({
                 icon: 'success',
@@ -157,11 +153,7 @@ function sbtUpdateExperience() {
                 GetExperienceData();
             });
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Update Failed',
-                confirmButtonText: 'Okey'
-            });
+            showErrors(response.errors);
         }
     }).fail(function (error) {
         Swal.fire({
@@ -211,6 +203,13 @@ function DeleteExperience(id) {
     });
 }
 //#endregion
+function showErrors(errors) {
+    $(".field-validation-valid").text("") // All error message clear.
+    $.each(errors, function (index, error) {
+        var $input = $('[name="' + error.PropertyName + '"]');
+        $input.siblings('span[data-valmsg-for="' + error.PropertyName + '"]').text(error.ErrorMessage);
+    });
+}
 //#region Ready
 $(document).ready(function () {
     GetExperienceData();

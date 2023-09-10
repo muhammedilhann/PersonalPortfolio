@@ -16,24 +16,28 @@
                             <label asp-for="@Model.Title" class="col-sm-3 col-form-label"></label>
                             <div class="col-sm-9">
                                 <input asp-for="@Model.Title" value="@Model.Title" class="form-control form-control-sm">
+                                <span class="text-danger" asp-validation-for="@Model.Title"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label asp-for="@Model.Description" class="col-sm-3 col-form-label"></label>
                             <div class="col-sm-9">
                                 <input asp-for="@Model.Description" value="@Model.Description" class="form-control form-control-sm">
+                                <span class="text-danger" asp-validation-for="@Model.Description"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label asp-for="@Model.StartDate" class="col-sm-3 col-form-label"></label>
                             <div class="col-sm-9">
                                 <input id="StartDate" value="@Model.StartDate.ToString("yyy-MM-dd")" type="date" class="form-control form-control-sm">
+                                <span class="text-danger" asp-validation-for="@Model.StartDate"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label asp-for="@Model.FinishDate" value="@Model.FinishDate" class="col-sm-3 col-form-label"></label>
                             <div class="col-sm-9">
                                 <input id="FinishDate" value="@Model.FinishDate.ToString("yyyy-MM-dd")" type="date" class="form-control form-control-sm">
+                                <span class="text-danger" asp-validation-for="@Model.FinishDate"></span>
                             </div>
                         </div>
                     </div>

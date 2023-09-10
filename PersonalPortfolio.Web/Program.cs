@@ -1,5 +1,8 @@
+using FluentValidation.AspNetCore;
 using PersonalPortfolio.Business.Extensions;
 using PersonalPortfolio.Business.Mapper;
+using PersonalPortfolio.Business.Validation;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,7 @@ builder.Services.ConfigureContextExtension(builder.Configuration);
 builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServiceRegistration();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddControllers().AddFluentValidation(options => { options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());}); 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

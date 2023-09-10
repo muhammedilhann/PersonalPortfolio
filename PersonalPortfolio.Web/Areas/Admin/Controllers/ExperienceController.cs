@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PersonalPortfolio.Business.Services.Abstract;
+using PersonalPortfolio.Business.Validation;
 using PersonalPortfolio.Entities.Dtos;
 using PersonalPortfolio.Entities.Entities;
 
@@ -37,11 +39,20 @@ namespace PersonalPortfolio.Web.Areas.Admin.Controllers
         public JsonResult AddExperience(string expAddData)
         { 
             var experienceAdd = JsonConvert.DeserializeObject<ExperienceAddDto>(expAddData);
-            var experience = _service.ExperienceService.Add(experienceAdd);
-            return Json(new
+
+            var validator = new ExperienceAddDtoValidator();
+            var validationResult = validator.Validate(experienceAdd);
+
+            if (!validationResult.IsValid)
             {
-                data = experience,
-            });
+                var errors = validationResult.Errors
+                                             .Select(e => new { PropertyName = e.PropertyName, ErrorMessage = e.ErrorMessage })
+                                             .ToList();
+                return Json(new { success = false, errors });
+            }
+            var experience = _service.ExperienceService.Add(experienceAdd);
+
+            return Json(new { success = experience != null ? true : false});
         }
         [HttpGet]
         public IActionResult UpdateModal(int id)
@@ -53,11 +64,20 @@ namespace PersonalPortfolio.Web.Areas.Admin.Controllers
         public JsonResult UpdateExperience(string expUpdateData)
         {
             var experienceUpdate = JsonConvert.DeserializeObject<ExperienceDto>(expUpdateData);
-            var experience = _service.ExperienceService.Update(experienceUpdate);
-            return Json(new
+
+            var validator = new ExperienceDtoValidator();
+            var validationResult = validator.Validate(experienceUpdate);
+            if (!validationResult.IsValid)
             {
-                data = experience,
-            });
+                var errors = validationResult.Errors
+                                             .Select(e => new { PropertyName = e.PropertyName, ErrorMessage = e.ErrorMessage })
+                                             .ToList();
+                return Json(new { success = false, errors });
+            }
+            var experience = _service.ExperienceService.Update(experienceUpdate);
+
+            return Json(new { success = experience != null ? true : false });
+         
         }
         [HttpPost]
         public JsonResult DeleteExperience(int id)
